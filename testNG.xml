@@ -4,12 +4,16 @@
 
 <suite name="Selenium Suite">
 
-    <test name="Login Test">
+	<test name="Login Test">
 
-        <classes>
-            <class name="com.qa.tests.LoginTest"/>
-        </classes>
+		<classes>
+			<class name="com.qa.tests.LoginTest" />
+		</classes>
 
-    </test>
+	</test>
+
+	<listeners>
+		<listener class-name="com.qa.listeners.ExtentListener" />
+	</listeners>
 
 </suite>
