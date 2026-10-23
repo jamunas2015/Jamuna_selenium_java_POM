@@ -7,6 +7,7 @@ import java.time.Duration;
 import com.qa.base.BaseTest;
 import com.qa.pages.LoginPage;
 import com.qa.utilities.waitUtility;
+import com.qa.utilities.ScreenshotUtils;
 
 public class LoginTest extends BaseTest {
 
@@ -21,6 +22,8 @@ public class LoginTest extends BaseTest {
         loginPage.enterPassword("admin123");
 
         loginPage.clickLogin();
+        
+        ScreenshotUtils.captureScreenshot(driver, "LoginTest");
         
         waitUtility.waitForUrlContains(driver, "dashboard");
         

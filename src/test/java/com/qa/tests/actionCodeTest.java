@@ -19,9 +19,15 @@ public class actionCodeTest extends BaseTest {
 
 		actionsCodePage actionsCodeTest = new actionsCodePage(driver);
 		
-		waitUtility.waitForUrlContains(driver, "elements");
+		waitUtility.waitForUrlContains(driver, "interactions");
 		
+		actionsCodeTest.clickOnDragableLink();
+		waitUtility.waitForUrlContains(driver, "draggable.html");
+		Thread.sleep(2000);
+		Assert.assertTrue(driver.findElement(By.id("drag-free")).isDisplayed());
 		
+		actionsCodeTest.dragBoxElement();
+		Thread.sleep(2000);
 }
 	
 }
