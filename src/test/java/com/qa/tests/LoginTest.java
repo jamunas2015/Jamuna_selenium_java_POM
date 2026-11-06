@@ -47,7 +47,7 @@ public class LoginTest extends BaseTest {
         
         String currentUrl = driver.getCurrentUrl();
         
-        Assert.assertTrue(currentUrl.contains("dashboardsd"));
+        Assert.assertTrue(currentUrl.contains("dashboard"));
         
         Thread.sleep(10000);
     }
