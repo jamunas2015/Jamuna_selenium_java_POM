@@ -2,9 +2,12 @@ package com.qa.base;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 
 import com.qa.utilities.ConfigReader;
 import com.qa.utilities.ScreenshotUtils;
@@ -14,37 +17,34 @@ public class BaseTest {
 	public WebDriver driver;
 
 	@BeforeMethod
+	
 	public void setup() {
 
-		driver = new ChromeDriver();
+		//driver = new ChromeDriver();
+		String browser = ConfigReader.getProperty("browser");
 
+		if (browser.equalsIgnoreCase("chrome")) {
+			driver = new ChromeDriver();
+		} else if (browser.equalsIgnoreCase("firefox")) {
+			// Initialize Firefox driver
+			driver = new FirefoxDriver();
+		} else if (browser.equalsIgnoreCase("edge")) {
+			// Initialize Edge driver
+			driver = new EdgeDriver();
+		} else {
+			throw new IllegalArgumentException("Invalid browser specified in config.properties");
+		}
+		
 		driver.manage().window().maximize();
 
 		driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(10));
 
-		// driver.get("https://opensource-demo.orangehrmlive.com/");
-
-		// webtable link
-
-		// driver.get("https://jstestingacademy.co.in/qa-demo/elements/");
-		// actions link
+		
 		
 		String url = ConfigReader.getProperty("orangehrm_url");
 		driver.get(url);
 	}
 
-	@AfterMethod
-	public void tearDown(ITestResult result) {
-
-	    if (result.getStatus() == ITestResult.FAILURE) {
-
-	        ScreenshotUtils.captureScreenshot(
-	                driver,
-	                result.getName());
-	    }
-
-	    driver.quit();
-	}
 	
 	
 	@AfterMethod

@@ -3,6 +3,7 @@ package com.qa.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.time.Duration;
+import java.io.File;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.qa.base.BaseTest;
@@ -28,9 +29,9 @@ public class LoginTest extends BaseTest {
         String username = users.get("username").asText();
         String password = users.get("password").asText();
         
-        loginPage.enterUsername("Admin");
+        loginPage.enterUsername(username);
 
-        loginPage.enterPassword("admin123");
+        loginPage.enterPassword(password);
 
         loginPage.clickLogin();
 		} catch (Exception e) {
@@ -38,13 +39,16 @@ public class LoginTest extends BaseTest {
 			e.printStackTrace();
 		}
         
-        ScreenshotUtils.captureScreenshot(driver, "LoginTest");
+		Thread.sleep(5000);
+
+		ScreenshotUtils.captureScreenshot(driver, "LoginTest");
         
         waitUtility.waitForUrlContains(driver, "dashboard");
         
         String currentUrl = driver.getCurrentUrl();
         
-        Assert.assertTrue(currentUrl.contains("dashboard"));
+        Assert.assertTrue(currentUrl.contains("dashboardsd"));
+        
         Thread.sleep(10000);
     }
 }

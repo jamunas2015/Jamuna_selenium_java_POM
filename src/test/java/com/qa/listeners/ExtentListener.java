@@ -1,18 +1,17 @@
 package com.qa.listeners;
 
-import org.openqa.selenium.WebDriver;
+
 import org.testng.ITestResult;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.qa.utilities.ExtentManager;
-import com.qa.utilities.ScreenshotUtils;
 
 public class ExtentListener implements org.testng.ITestListener {
 
 	ExtentReports extent = ExtentManager.getReportObject();
     ExtentTest test;
-    WebDriver driver;
+    
 
     public void onTestStart(ITestResult result) {
 
@@ -25,11 +24,7 @@ public class ExtentListener implements org.testng.ITestListener {
     }
 
     public void onTestFailure(ITestResult result) {
-    	String path = ScreenshotUtils.captureScreenshot(
-    	        driver,
-    	        result.getName());
-
-    	test.addScreenCaptureFromPath(path);
+    	
 
         test.fail(result.getThrowable());
     }

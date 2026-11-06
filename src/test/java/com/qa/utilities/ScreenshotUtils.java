@@ -22,6 +22,8 @@ public class ScreenshotUtils {
 	                + testName + "_" + timestamp + ".png";
 
 	        try {
+	        	System.out.println(driver.getTitle());
+	        	System.out.println(driver.getCurrentUrl());
 
 	            File srcFile = ((TakesScreenshot) driver)
 	                    .getScreenshotAs(OutputType.FILE);
@@ -29,6 +31,7 @@ public class ScreenshotUtils {
 	            FileUtils.copyFile(srcFile, new File(screenshotPath));
 
 	            System.out.println("Screenshot saved: " + screenshotPath);
+	            
 
 	        } catch (IOException e) {
 	            e.printStackTrace();
